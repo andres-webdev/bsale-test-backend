@@ -1,35 +1,44 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const productRoutes = require('./routes/productsRoutes');
-const categoryRoutes = require('./routes/categoriesRoutes');
+const express = require('express')
+const cors = require('cors')
+const app = express()
+const { products, searchProduct, orderProductByNameDesc, orderProductByPriceAsc, orderProductByPriceDesc, discountProducts } = require('./routes/productsRoutes')
+const { category, productsByCategory } = require('./routes/categoriesRoutes')
 
-app.use(cors());
+app.use(cors())
 
 // Mostrar todos los productos A-Z
-app.use(productRoutes.products);
+app.use(products)
 
 // Busca producto por nombre
-app.use(productRoutes.searchProduct);
+app.use(searchProduct)
 
 // Mostrar productos ordenados por nombre Z-A
-app.use(productRoutes.orderProductByNameDesc);
+app.use(orderProductByNameDesc)
 
 // Mostrar los productos ordenados por precio - ASC
-app.use(productRoutes.orderProductByPriceAsc);
+app.use(orderProductByPriceAsc)
 
 // Mostrar los productos ordenados por precio - DESC
-app.use(productRoutes.orderProductByPriceDesc);
+app.use(orderProductByPriceDesc)
 
 // Mostrar productos con descuento
-app.use(productRoutes.discountProducts);
+app.use(discountProducts)
 
 // Lista de categorias
-app.use(categoryRoutes.category);
+app.use(category)
 
 // Mostrar productos por categoria
-app.use(categoryRoutes.productsByCategory);
+app.use(productsByCategory)
 
-app.listen(3000, () => {
-  console.log('Servidor Ok - Running...');
-});
+// Error 404
+app.use((req, res) => {
+  res.status(404).json({
+    error: 'Not found'
+  })
+})
+
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => {
+  console.log('Servidor Ok - Running...')
+})

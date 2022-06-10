@@ -1,11 +1,11 @@
-const express = require('express');
-const route = express.Router();
-const categoryController = require('../controllers/categoryControllers');
+const express = require('express')
+const route = express.Router()
+const { categories, productsByCategory } = require('../controllers/categoryControllers')
 
-const categoryRoutes = {};
+const categoryRoutes = {}
 
-categoryRoutes.category = route.get('/api/category', categoryController.categories);
+categoryRoutes.category = route.get('/api/category', categories)
 
-categoryRoutes.productsByCategory = route.get('/api/category/:id', categoryController.productsByCategory);
+categoryRoutes.productsByCategory = route.get('/api/category/:id', productsByCategory)
 
-module.exports = categoryRoutes;
+module.exports = categoryRoutes

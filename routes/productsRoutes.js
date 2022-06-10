@@ -1,19 +1,19 @@
-const express = require('express');
-const route = express.Router();
-const productController = require('../controllers/productControllers');
+const express = require('express')
+const route = express.Router()
+const { products, productByName, productsDesc, priceProductsAsc, priceProductsDesc, productsByDiscount } = require('../controllers/productControllers')
 
-const productRoutes = {};
+const productRoutes = {}
 
-productRoutes.products = route.get('/api/products', productController.products);
+productRoutes.products = route.get('/api/products', products)
 
-productRoutes.searchProduct = route.get('/api/products/:name', productController.productByName);
+productRoutes.searchProduct = route.get('/api/products/:name', productByName)
 
-productRoutes.orderProductByNameDesc = route.get('/api/products/order/Z-A', productController.productsDesc);
+productRoutes.orderProductByNameDesc = route.get('/api/products/order/Z-A', productsDesc)
 
-productRoutes.orderProductByPriceAsc = route.get('/api/products/order/lowerprice', productController.priceProductsAsc);
+productRoutes.orderProductByPriceAsc = route.get('/api/products/order/lowerprice', priceProductsAsc)
 
-productRoutes.orderProductByPriceDesc = route.get('/api/products/order/higherprice', productController.priceProductsDesc);
+productRoutes.orderProductByPriceDesc = route.get('/api/products/order/higherprice', priceProductsDesc)
 
-productRoutes.discountProducts = route.get('/api/products/order/discount', productController.productsByDiscount);
+productRoutes.discountProducts = route.get('/api/products/order/discount', productsByDiscount)
 
-module.exports = productRoutes;
+module.exports = productRoutes

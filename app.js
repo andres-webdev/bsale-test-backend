@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const { products, searchProduct, orderProductByNameDesc, orderProductByPriceAsc, orderProductByPriceDesc, discountProducts } = require('./routes/productsRoutes')
-const { category, productsByCategory } = require('./routes/categoriesRoutes')
+const { products, searchProduct, orderProductByNameDesc, orderProductByPriceAsc, orderProductByPriceDesc, discountProducts, productsByCategory } = require('./routes/productsRoutes')
+const { category } = require('./routes/categoriesRoutes')
 
 app.use(cors())
 
@@ -32,9 +32,7 @@ app.use(productsByCategory)
 
 // Error 404
 app.use((req, res) => {
-  res.status(404).json({
-    error: 'Not found'
-  })
+  res.status(404).send('Error: Not found or page doesn\'t exist')
 })
 
 const PORT = process.env.PORT || 3000

@@ -1,12 +1,12 @@
 const pool = require('../db/db')
 const productController = {}
 
-function queryResult (error, result, response, msg) {
+async function queryResult (error, result, response) {
   if (error) {
-    response.status(404).end()
+    await response.status(404).send(error).end()
     throw error
   } else {
-    response.status(200).json(result)
+    await response.status(200).json(result).end()
   }
 }
 
@@ -42,6 +42,12 @@ productController.productByName = (req, res) => {
 
 productController.productsByDiscount = (req, res) => {
   pool.query('SELECT * FROM product WHERE discount > 0 ORDER BY discount DESC', (error, result) => {
+    queryResult(error, result, res)
+  })
+}
+
+productController.productsByCategory = (req, res) => {
+  pool.query('SELECT * FROM product WHERE category=?', [req.params.id], (error, result) => {
     queryResult(error, result, res)
   })
 }

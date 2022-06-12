@@ -1,23 +1,38 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const productRoutes = require('./routes/productsRoutes');
-const categoryRoutes = require('./routes/categoriesRoutes');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
-app.use(cors());
+const express = require('express')
+const cors = require('cors')
+const path = require('path')
+const morgan = require('morgan')
+const app = express()
 
-// Mostrar todos los productos
-app.use(productRoutes.products);
+// Settings
+app.set('port', process.env.PORT || 3001)
+app.use(cors())
 
-// Busca producto por nombre
-app.use(productRoutes.searchProduct);
+// Middlewares
+app.use(morgan('dev'))
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
-// Lista de categorias
-app.use(categoryRoutes.category);
+//  Routes - Products and Category
 
-// Mostrar productos por categoria
-app.use(categoryRoutes.productsByCategory);
+app.use('/api/products', require('./routes/productsRoutes'))
+app.use('/api/category', require('./routes/categoryRoutes'))
 
-app.listen(3000, () => {
-  console.log('Servidor Ok - Running...');
-});
+//  Static files
+
+app.use(express.static(path.join(__dirname, 'public')))
+
+// Error 404
+app.use((req, res) => {
+  res.status(404).send('Error: Not found or page doesn\'t exist')
+})
+
+// Start Server
+
+app.listen(app.get('port'), () => {
+  console.log('Server on port', app.get('port'))
+})

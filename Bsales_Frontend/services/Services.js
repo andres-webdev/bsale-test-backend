@@ -1,5 +1,5 @@
-const URL_PRODUCTS = 'http://localhost:3001/api/products'
-const URL_CATEGORY = 'http://localhost:3001/api/category'
+const URL_PRODUCTS = '/api/products'
+const URL_CATEGORY = '/api/category'
 
 class Services {
   async getProducts () {

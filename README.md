@@ -1,4 +1,4 @@
-# Bsale Test by Andres Marquez
+# Bsale Test - Andrés Márquez
 
 ## Documentación - RESTAPI
 
@@ -48,7 +48,7 @@ Al realizar una petición HTTP, el servicio retornara un JSON con la siguiente e
 
 #### Dashboard de la aplicación
 
-- [Dashboard-Bsale-Andres--Marquez](https://bsale-test-andres-marquez.herokuapp.com) - https://bsale-test-andres-marquez.herokuapp.com
+- [Dashboard-Bsale-Andres--Marquez](https://bsale-test-andres-marquez.herokuapp.com)
 
 #### GET lista de productos
 

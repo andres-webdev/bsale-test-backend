@@ -1,11 +1,19 @@
-const express = require('express');
-const route = express.Router();
-const productController = require('../controllers/productControllers');
+const { Router } = require('express')
+const { products, productByName, productsDesc, priceProductsAsc, priceProductsDesc, productsByDiscount, productsByCategory } = require('../controllers/productControllers')
+const route = Router()
 
-const productRoutes = {};
+route.get('/', products)
 
-productRoutes.products = route.get('/api/products', productController.products);
+route.get('/:name', productByName)
 
-productRoutes.searchProduct = route.get('/api/products/:name', productController.productByName)
+route.get('/order/Z-A', productsDesc)
 
-module.exports = productRoutes;
+route.get('/order/lowerprice', priceProductsAsc)
+
+route.get('/order/higherprice', priceProductsDesc)
+
+route.get('/order/discount', productsByDiscount)
+
+route.get('/category/:id', productsByCategory)
+
+module.exports = route

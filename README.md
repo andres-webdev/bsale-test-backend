@@ -99,3 +99,18 @@ GET  /api/products/:name
 ```sh
 GET  /api/category
 ```
+
+### Detalles
+
+- Recuerda que para utilizar la api de manera local necesitas crear el archivo .env en la carpeta principal, con la siguiente información
+
+```sh
+.env
+  MYSQL_HOST_BSALE=mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com
+  MYSQL_USER_BSALE=bsale_test
+  MYSQL_PASSWORD_BSALE=bsale_test
+  MYSQL_DB_BSALE=bsale_test
+```
+
+Gracias
+

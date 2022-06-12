@@ -1,29 +1,32 @@
-const pool = require('../db/db');
-const productController = {};
+const dataBase = require('../db/database')
+const productController = {}
 
 productController.products = (req, res) => {
+  dataBase(req, res, 'SELECT * FROM product ORDER BY name ASC')
+}
 
-  pool.query('SELECT * FROM product', (error, result) => {
+productController.productsDesc = (req, res) => {
+  dataBase(req, res, 'SELECT * FROM product ORDER BY name DESC')
+}
 
-    if(error){
-      throw error;
-    } else{
-      res.status(200).json(result);
-      console.log('Allproducts OK');
-    }
-  });
-};
+productController.priceProductsAsc = (req, res) => {
+  dataBase(req, res, 'SELECT * FROM product ORDER BY price ASC')
+}
+
+productController.priceProductsDesc = (req, res) => {
+  dataBase(req, res, 'SELECT * FROM product ORDER BY price DESC')
+}
 
 productController.productByName = (req, res) => {
+  dataBase(req, res, `SELECT * FROM product WHERE name LIKE '${req.params.name}%'`)
+}
 
-  pool.query(`SELECT * FROM product WHERE name LIKE '${req.params.name}%'`, (error, result) => {
-    if(error){
-      throw error;
-    } else{
-      res.status(200).json(result);
-      console.log('Product By Name OK');
-    }
-  });
-};
+productController.productsByDiscount = (req, res) => {
+  dataBase(req, res, 'SELECT * FROM product WHERE discount > 0 ORDER BY discount DESC')
+}
 
-module.exports = productController;
+productController.productsByCategory = (req, res) => {
+  dataBase(req, res, `SELECT * FROM product WHERE category=${req.params.id}`)
+}
+
+module.exports = productController

@@ -18,7 +18,7 @@ productController.priceProductsDesc = (req, res) => {
 }
 
 productController.productByName = (req, res) => {
-  dataBase(req, res, `SELECT * FROM product WHERE name LIKE '${req.params.name}%'`)
+  dataBase(req, res, `SELECT * FROM product WHERE name LIKE '%${req.params.name}%'`)
 }
 
 productController.productsByDiscount = (req, res) => {
